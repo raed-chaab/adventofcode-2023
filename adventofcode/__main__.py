@@ -21,7 +21,7 @@ def main() -> None:
     p = get_parser()
     args = p.parse_args()
 
-    day1(args.data_day1)
+    day1(args.data_day1, args.decode_day1)
 
 if __name__ == "__main__":
 

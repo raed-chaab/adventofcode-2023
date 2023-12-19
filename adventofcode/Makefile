@@ -9,7 +9,7 @@
 ## Environement Variables
 ##
 ##    SOLUTION:		         allow to define the solution to test
-##    TBD_LATER:	         tbd
+##    ADVENTOFCODE_DEBUG:	 print debug log
 
 # LOCAl VAR
 TBD_LATER ?= TBD_LATER
