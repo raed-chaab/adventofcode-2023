@@ -39,4 +39,7 @@ all: solution ## Start all solution
 ##
 .PHONY: solution
 solution: ## Test some solution (by default all solution are tested)
-	docker run --rm  -v ${PWD}/${SOLUTION}:/tmp/workspace -w /tmp/workspace ${PYTHON_IMAGE} pytest .
+	python3 ${PWD}/${SOLUTION}
+
+docker-solution: ## Test some solution with docker (by default all solution are tested)
+	docker run --rm  -v ${PWD}/${SOLUTION}:/tmp/workspace -w /tmp/workspace ${PYTHON_IMAGE} python .
