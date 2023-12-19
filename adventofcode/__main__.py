@@ -6,6 +6,7 @@ from types import FrameType
 from typing import NoReturn, Optional
 
 from Day1.__main__ import day1, get_parser_day1
+from Day2.__main__ import CubeSet, day2, get_parser_day2
 
 def get_parser() -> argparse.ArgumentParser:
     """Create a parser for the application."""
@@ -13,7 +14,7 @@ def get_parser() -> argparse.ArgumentParser:
         prog="adventofcode" if __name__ == "__main__" else None,
         description="Solutions for adventofcode.",
     )
-    parser = argparse.ArgumentParser(parents=[get_parser_day1()])
+    parser = argparse.ArgumentParser(parents=[get_parser_day1(), get_parser_day2()])
     return parser
 
 def main() -> None:
@@ -22,6 +23,7 @@ def main() -> None:
     args = p.parse_args()
 
     day1(args.data_day1, args.decode_day1)
+    day2(args.data_day2, CubeSet(red=args.max_red_day2, green=args.max_green_day2, blue=args.max_blue_day2))
 
 if __name__ == "__main__":
 
