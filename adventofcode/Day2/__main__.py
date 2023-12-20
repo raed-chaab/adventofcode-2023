@@ -30,6 +30,18 @@ def get_parser_day2() -> argparse.ArgumentParser:
     day2.add_argument("--max-red-day2", type=int, help="max number of red cubes in a set", default=12)
     day2.add_argument("--max-green-day2", type=int, help="max number of green cubes in a set", default=13)
     day2.add_argument("--max-blue-day2", type=int, help="max number of blue cubes in a set", default=14)
+    day2.add_argument(
+        "--min-day2",
+        action='store_true',
+        help="instead of sum all game lower than a max CubeSet calculate the power sum of each game"
+    )
+    day2.add_argument(
+        '--max-day2',
+        dest='min_day2',
+        action='store_false',
+        help="sum all game lower than a max CubeSet"
+    )
+    day2.set_defaults(min_day2=True) 
     return parser
 
 COLORS = ['blue', 'green', 'red']
@@ -42,6 +54,12 @@ class CubeSet:
         self.blue = blue
         self.green = green
         self.red = red
+    def maximise(self, other):
+        self.blue = max(self.blue, other.blue)
+        self.green = max(self.green, other.green)
+        self.red = max(self.red, other.red)
+    def power(self) -> int:
+        return self.blue * self.green * self.red
     def __le__(self, other):
         """Implement an operator '<='."""
         return (self.blue <= other.blue and
@@ -50,7 +68,7 @@ class CubeSet:
     def __str__(self) -> str:
         return f"Set blue={self.blue} red={self.red} green={self.green}"
 
-def day2(data_file: Path, max_cube_set: CubeSet) -> None:
+def day2(data_file: Path, max_cube_set: CubeSet, min_game: bool = False) -> None:
     """
     Main routines for Day 2.
 
@@ -59,11 +77,20 @@ def day2(data_file: Path, max_cube_set: CubeSet) -> None:
     # Parse the file 
     games: Dict[int, List[CubeSet]] = parse_data(data_file)
 
-    # keep games that are smaller than max
-    numbers = [val for val, cube_sets in games.items() if all(cube_set <= max_cube_set for cube_set in cube_sets)]
+    if min_game:
+        numbers = [val for val, cube_sets in games.items() if all(cube_set <= max_cube_set for cube_set in cube_sets)]
+    else:
+        # keep games that are smaller than max
+        numbers = [game_power(cube_sets) for _, cube_sets in games.items()]
 
     # Print the result
     logger.info("The solution of Day2 is: %d", sum(numbers))
+
+def game_power(cube_sets: List[CubeSet]) -> int:
+    res = CubeSet()
+    for cube_set in cube_sets:
+        res.maximise(cube_set)
+    return res.power()
 
 def parse_data(data_path: Path) -> Dict[int, List[CubeSet]]:
     """Read Each Line and parse the content"""
@@ -100,6 +127,7 @@ if __name__ == "__main__":
     red: int = args.max_red_day2
     green: int = args.max_green_day2
     blue: int = args.max_blue_day2
+    min_game: bool = args.min_day2
 
     def handler(signum: int, frame: Optional[FrameType]) -> NoReturn:
         print(f"✋ signal [{signum}] received → exiting...")
@@ -108,7 +136,7 @@ if __name__ == "__main__":
     signal.signal(signal.SIGINT, handler)
     signal.signal(signal.SIGTERM, handler)
     try:
-        day2(data_file, CubeSet(red=red,green=green,blue=blue))
+        day2(data_file, CubeSet(red=red,green=green,blue=blue), min_game)
     except KeyboardInterrupt:
         print("✋ Ctrl-c was pressed. Exiting...")
         sys.exit(0)
