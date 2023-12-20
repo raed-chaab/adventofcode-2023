@@ -1,20 +1,21 @@
-
-
-from logging import DEBUG, getLogger, INFO, Logger, StreamHandler
 import os
+from logging import DEBUG, INFO, Logger, StreamHandler, getLogger
+
 
 class MetaSingleton(type):
     __instances = {}
+
     def __call__(cls, *args, **kwargs):
         if cls not in MetaSingleton.__instances:
-            MetaSingleton.__instances[cls] = super(MetaSingleton, cls).__call__(*args, **kwargs)
+            MetaSingleton.__instances[cls] = super(MetaSingleton, cls).__call__(
+                *args, **kwargs
+            )
         return MetaSingleton.__instances[cls]
 
 
 class MyLogger(metaclass=MetaSingleton):
-    """Logger as a Singleton
-    
-    """
+    """Logger as a Singleton"""
+
     def __init__(self):
         self.logger: Logger = getLogger(__name__)
         # create console handler
@@ -26,8 +27,8 @@ class MyLogger(metaclass=MetaSingleton):
         else:
             self.logger.setLevel(INFO)
             ch.setLevel(INFO)
-        
+
         self.logger.addHandler(ch)
 
-    def get_logger(self) -> Logger :
+    def get_logger(self) -> Logger:
         return self.logger

@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 import argparse
-import signal
 import sys
-from types import FrameType
-from typing import NoReturn, Optional
+from utils.error import AdventOfCodeException
 
-from Day1.__main__ import day1, get_parser_day1
-from Day2.__main__ import CubeSet, day2, get_parser_day2
+from day1 import day1, get_parser_day1
+from day2 import day2, get_parser_day2
+
 
 def get_parser() -> argparse.ArgumentParser:
     """Create a parser for the application."""
@@ -17,27 +16,28 @@ def get_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(parents=[get_parser_day1(), get_parser_day2()])
     return parser
 
+
 def main() -> None:
     """Main routines."""
     p = get_parser()
     args = p.parse_args()
 
-    day1(args.data_day1, args.decode_day1)
-    day2(args.data_day2, CubeSet(red=args.max_red_day2, green=args.max_green_day2, blue=args.max_blue_day2))
+    #TBD take into account SOLUTION env var
+
+    day1(**vars(args))
+    day1(part2=True, **vars(args))
+    day2(**vars(args))
+    day2(part2=True, **vars(args))
+
 
 if __name__ == "__main__":
 
-    def handler(signum: int, frame: Optional[FrameType]) -> NoReturn:
-        print(f"✋ signal [{signum}] received → exiting...")
-        sys.exit(0)
-
-    signal.signal(signal.SIGINT, handler)
-    signal.signal(signal.SIGTERM, handler)
     try:
         main()
-    except KeyboardInterrupt:
-        print("✋ Ctrl-c was pressed. Exiting...")
-        sys.exit(0)
+    except AdventOfCodeException as exc:
+        print(f"✋ {exc.__class__.__name__} exception occured {exc}")
     except Exception as exc:
-        print(f"⛌ error: {exc}")
-    sys.exit(0)
+        print(f"⛌ Unexpected error: {exc}")
+    else:
+        sys.exit(0)
+    sys.exit(1)
