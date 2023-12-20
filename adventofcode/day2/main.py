@@ -5,8 +5,8 @@ from logging import Logger
 from pathlib import Path
 from typing import Dict, List, Tuple
 
-from utils.logger import MyLogger
 from utils.error import Day2Exception
+from utils.logger import MyLogger
 
 FILE_PATH = os.path.abspath(__file__)
 DEFAULT_DAY2_DATA = os.path.dirname(FILE_PATH) + "/data/input.txt"
@@ -39,7 +39,6 @@ def get_parser_day2() -> argparse.ArgumentParser:
         help="max number of blue cubes in a set",
         default=14,
     )
-    day2.set_defaults(min_day2=True)
     return parser
 
 
@@ -48,6 +47,7 @@ COLORS = ["blue", "green", "red"]
 
 class CubeSet:
     """Cube set of a game"""
+
     blue: int
     green: int
     red: int
@@ -92,29 +92,29 @@ def day2(part2: bool = False, **kwargs) -> None:
 
     :return: None.
     """
-    if 'data_day2' not in kwargs:
+    if "data_day2" not in kwargs:
         raise Day2Exception("Undefined parameter 'data_day2'")
 
     # Parse the file
-    games: Dict[int, List[CubeSet]] = parse_data(kwargs['data_day2'])
+    games: Dict[int, List[CubeSet]] = parse_data(kwargs["data_day2"])
 
     if part2:
         # Calculate the power of the minimum set of cubes for each game
         numbers = [game_power(cube_sets) for _, cube_sets in games.items()]
     else:
-        if 'max_red_day2' not in kwargs:
+        if "max_red_day2" not in kwargs:
             raise Day2Exception("Undefined parameter 'max_red_day2'")
-        if 'max_green_day2' not in kwargs:
+        if "max_green_day2" not in kwargs:
             raise Day2Exception("Undefined parameter 'max_green_day2'")
-        if 'max_blue_day2' not in kwargs:
+        if "max_blue_day2" not in kwargs:
             raise Day2Exception("Undefined parameter 'max_blue_day2'")
-        
+
         max_cube_set: CubeSet = CubeSet(
-            red=kwargs['max_red_day2'],
-            green=kwargs['max_green_day2'],
-            blue=kwargs['max_blue_day2'],
+            red=kwargs["max_red_day2"],
+            green=kwargs["max_green_day2"],
+            blue=kwargs["max_blue_day2"],
         )
-        # Keep only the games where none of the CubeSet objects used exceed 
+        # Keep only the games where none of the CubeSet objects used exceed
         # the maximum cube set defined by the max_cube_set
         numbers = [
             val
@@ -122,7 +122,6 @@ def day2(part2: bool = False, **kwargs) -> None:
             # If all cube_set are smaller than max_cube_set
             if all(cube_set <= max_cube_set for cube_set in cube_sets)
         ]
-
 
     # Print the result
     logger.info("The solution of Day2 PART%d is: %d", 2 if part2 else 1, sum(numbers))

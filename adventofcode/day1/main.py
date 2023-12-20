@@ -1,19 +1,18 @@
 import argparse
 import os
 import re
-import sys
-from logging import DEBUG, Logger
+from logging import Logger
 from pathlib import Path
 from typing import Dict, List
 
-from utils.logger import MyLogger
 from utils.error import Day1Exception
+from utils.logger import MyLogger
 
 FILE_PATH = os.path.abspath(__file__)
 DEFAULT_DAY1_DATA = os.path.dirname(FILE_PATH) + "/data/input.txt"
 
 NUMBERS_DICT: Dict[str, str] = {
-    #"zero": "0",
+    # "zero": "0",
     "one": "1",
     "two": "2",
     "three": "3",
@@ -26,6 +25,7 @@ NUMBERS_DICT: Dict[str, str] = {
 }
 
 logger: Logger = MyLogger().get_logger()
+
 
 def get_parser_day1() -> argparse.ArgumentParser:
     """Create a parser for the module."""
@@ -49,11 +49,11 @@ def day1(part2: bool = False, **kwargs) -> None:
 
     :return: None.
     """
-    if 'data_day1' not in kwargs:
+    if "data_day1" not in kwargs:
         raise Day1Exception("Undefined parameter 'data_day1'")
 
     # Parse the file
-    numbers: List[int] = parse_data(kwargs['data_day1'], part2)
+    numbers: List[int] = parse_data(kwargs["data_day1"], part2)
 
     # Print the result
     logger.info("The solution of Day1 PART%d is: %d", 2 if part2 else 1, sum(numbers))

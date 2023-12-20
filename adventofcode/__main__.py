@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 import argparse
 import sys
-from utils.error import AdventOfCodeException
 
 from day1 import day1, get_parser_day1
 from day2 import day2, get_parser_day2
+from day3 import day3, get_parser_day3
+from utils.error import AdventOfCodeException
 
 
 def get_parser() -> argparse.ArgumentParser:
@@ -13,7 +14,9 @@ def get_parser() -> argparse.ArgumentParser:
         prog="adventofcode" if __name__ == "__main__" else None,
         description="Solutions for adventofcode.",
     )
-    parser = argparse.ArgumentParser(parents=[get_parser_day1(), get_parser_day2()])
+    parser = argparse.ArgumentParser(
+        parents=[get_parser_day1(), get_parser_day2(), get_parser_day3()]
+    )
     return parser
 
 
@@ -22,16 +25,17 @@ def main() -> None:
     p = get_parser()
     args = p.parse_args()
 
-    #TBD take into account SOLUTION env var
+    # TBD take into account SOLUTION env var
 
     day1(**vars(args))
     day1(part2=True, **vars(args))
     day2(**vars(args))
     day2(part2=True, **vars(args))
+    day3(**vars(args))
+    day3(part2=True, **vars(args))
 
 
 if __name__ == "__main__":
-
     try:
         main()
     except AdventOfCodeException as exc:
