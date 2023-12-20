@@ -12,3 +12,7 @@ class Day2Exception(AdventOfCodeException):
 
 class Day3Exception(AdventOfCodeException):
     """The base exception class for all day3 Exceptions"""
+
+
+class Day4Exception(AdventOfCodeException):
+    """The base exception class for all day4 Exceptions"""

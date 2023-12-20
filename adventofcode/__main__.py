@@ -5,6 +5,7 @@ import sys
 from day1 import day1, get_parser_day1
 from day2 import day2, get_parser_day2
 from day3 import day3, get_parser_day3
+from day4 import day4, get_parser_day4
 from utils.error import AdventOfCodeException
 
 
@@ -15,7 +16,7 @@ def get_parser() -> argparse.ArgumentParser:
         description="Solutions for adventofcode.",
     )
     parser = argparse.ArgumentParser(
-        parents=[get_parser_day1(), get_parser_day2(), get_parser_day3()]
+        parents=[get_parser_day1(), get_parser_day2(), get_parser_day3(), get_parser_day4()]
     )
     return parser
 
@@ -33,7 +34,8 @@ def main() -> None:
     day2(part2=True, **vars(args))
     day3(**vars(args))
     day3(part2=True, **vars(args))
-
+    day4(**vars(args))
+    day4(part2=True, **vars(args))
 
 if __name__ == "__main__":
     try:
