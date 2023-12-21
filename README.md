@@ -9,7 +9,7 @@ Good question I don't know either 😊.
 
 ## Usage
 
-See [Makefile](./Makefile) for recipes or `make help`.
+See [Makefile](./adventofcode/Makefile) for recipes or `make help`.
 
 ### Locally
 
