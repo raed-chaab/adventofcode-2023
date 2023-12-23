@@ -7,22 +7,31 @@ A repo to participate in the AdventOfCode 2023 event.
 
 Good question I don't know either 😊.
 
+Just kidding, it's an example solution implementation for the programming challenge [advent of code 2023](https://adventofcode.com/2023/) in python.
+
 ## Usage
 
-See [Makefile](./adventofcode/Makefile) for recipes or `make help`.
+See [Makefile](./adventofcode/Makefile).
+
+```shell
+cd adventofcode
+make help
+```
 
 ### Locally
 
 ```shell
 cd adventofcode
-sh testenv.sh
-pytest .
+make all
+#or
+python .
 ```
 
 ### Docker
 
 ```shell
-docker run -i -t --rm --name="adventofcode" -v adventofcode:/tmp -w /tmp python:3.8.14 /bin/bash # Start a container with python
-sh testenv.sh
-pytest .
+cd adventofcode
+make docker-solution
+#or
+docker run -i -t --rm --name="adventofcode" -v adventofcode:/tmp -w /tmp python:3.8.14 python .
 ```

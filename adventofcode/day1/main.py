@@ -40,7 +40,7 @@ def get_parser_day1() -> argparse.ArgumentParser:
     return parser
 
 
-def day1(part2: bool = False, **kwargs) -> None:
+def day1(part2: bool = False, **kwargs) -> int:
     """
     Main routines for Day 1.
 
@@ -56,27 +56,29 @@ def day1(part2: bool = False, **kwargs) -> None:
     numbers: List[int] = parse_data(kwargs["data_day1"], part2)
 
     # Print the result
-    logger.info("The solution of Day1 PART%d is: %d", 2 if part2 else 1, sum(numbers))
+    result: int = sum(numbers)
+    logger.info("The solution of Day1 PART%d is: %d", 2 if part2 else 1, result)
+    return result
 
 
-def parse_data(data_path: Path, decode: bool) -> List[int]:
+def parse_data(data_path: Path, part2: bool) -> List[int]:
     """Read Each Line and parse the content"""
     res: List[int] = []
     with open(data_path, "r") as f:
         for line in f:
-            res.append(decode_line(line.strip(), decode))
+            res.append(decode_line(line.strip(), part2))
     # Assert something is parsed
     if len(res) == 0:
         raise Day1Exception(f"no data are found in file {data_path}")
     return res
 
 
-def decode_line(line: str, decode: bool) -> int:
+def decode_line(line: str, part2: bool) -> int:
     """Return the first and the last number"""
     line_to_decode = line.lower()
 
     # Take into account digits spell out with letters
-    if decode:
+    if part2:
         for num, value in NUMBERS_DICT.items():
             # Tricky data such as "oneight" should work.
             line_to_decode = line_to_decode.replace(num, num + value + num)
