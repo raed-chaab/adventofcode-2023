@@ -7,7 +7,7 @@ from logging import Logger
 from pathlib import Path
 from typing import Dict, List, Tuple
 
-from utils.error import Day8Exception
+from utils.error import AdventOfCodeException
 from utils.logger import MyLogger
 
 FILE_PATH = os.path.abspath(__file__)
@@ -84,7 +84,7 @@ def day8(part2: bool = False, **kwargs) -> int:
     :return: None.
     """
     if "data_day8" not in kwargs:
-        raise Day8Exception("Undefined parameter 'data_day8'")
+        raise AdventOfCodeException("Undefined parameter 'data_day8'")
 
     maps: Maps = parse_data(kwargs["data_day8"])
 

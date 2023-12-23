@@ -7,7 +7,7 @@ from logging import Logger
 from pathlib import Path
 from typing import List
 
-from utils.error import Day6Exception
+from utils.error import AdventOfCodeException
 from utils.logger import MyLogger
 
 FILE_PATH = os.path.abspath(__file__)
@@ -61,7 +61,7 @@ def day6(part2: bool = False, **kwargs) -> None:
     :return: None.
     """
     if "data_day6" not in kwargs:
-        raise Day6Exception("Undefined parameter 'data_day6'")
+        raise AdventOfCodeException("Undefined parameter 'data_day6'")
 
     # Parse the file
     race = parse_data(kwargs["data_day6"], part2)

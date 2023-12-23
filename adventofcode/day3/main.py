@@ -5,7 +5,7 @@ from logging import Logger
 from pathlib import Path
 from typing import List
 
-from utils.error import Day3Exception
+from utils.error import AdventOfCodeException
 from utils.logger import MyLogger
 
 FILE_PATH = os.path.abspath(__file__)
@@ -167,7 +167,7 @@ def day3(part2: bool = False, **kwargs) -> None:
     :return: None.
     """
     if "data_day3" not in kwargs:
-        raise Day3Exception("Undefined parameter 'data_day3'")
+        raise AdventOfCodeException("Undefined parameter 'data_day3'")
 
     # Parse the file
     engine_schema: EngineShema = parse_data(kwargs["data_day3"])

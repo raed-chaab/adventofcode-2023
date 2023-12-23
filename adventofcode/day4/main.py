@@ -5,7 +5,7 @@ from logging import Logger
 from pathlib import Path
 from typing import List
 
-from utils.error import Day4Exception
+from utils.error import AdventOfCodeException
 from utils.logger import MyLogger
 
 FILE_PATH = os.path.abspath(__file__)
@@ -69,7 +69,7 @@ def day4(part2: bool = False, **kwargs) -> None:
     :return: None.
     """
     if "data_day4" not in kwargs:
-        raise Day4Exception("Undefined parameter 'data_day4'")
+        raise AdventOfCodeException("Undefined parameter 'data_day4'")
 
     # Parse the file
     cards: List[Card] = parse_data(kwargs["data_day4"])
@@ -99,7 +99,7 @@ def decode_line(line: str, index: int) -> Card:
     line_to_decode = line
     match = re.match(r"^Card[ ]*(\d+): (.+) \| (.+)$", line_to_decode)
     if not match:
-        raise Day4Exception(f"Invalid Card in line : {line_to_decode}")
+        raise AdventOfCodeException(f"Invalid Card in line : {line_to_decode}")
     winning_numbers: List[int] = [int(i) for i in match.group(2).split()]
     numbers: List[int] = [int(i) for i in match.group(3).split()]
     return Card(winning_numbers, numbers, index)

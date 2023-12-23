@@ -5,7 +5,7 @@ from logging import Logger
 from pathlib import Path
 from typing import Dict, List, Tuple
 
-from utils.error import Day2Exception
+from utils.error import AdventOfCodeException
 from utils.logger import MyLogger
 
 FILE_PATH = os.path.abspath(__file__)
@@ -93,7 +93,7 @@ def day2(part2: bool = False, **kwargs) -> None:
     :return: None.
     """
     if "data_day2" not in kwargs:
-        raise Day2Exception("Undefined parameter 'data_day2'")
+        raise AdventOfCodeException("Undefined parameter 'data_day2'")
 
     # Parse the file
     games: Dict[int, List[CubeSet]] = parse_data(kwargs["data_day2"])
@@ -103,11 +103,11 @@ def day2(part2: bool = False, **kwargs) -> None:
         numbers = [game_power(cube_sets) for _, cube_sets in games.items()]
     else:
         if "max_red_day2" not in kwargs:
-            raise Day2Exception("Undefined parameter 'max_red_day2'")
+            raise AdventOfCodeException("Undefined parameter 'max_red_day2'")
         if "max_green_day2" not in kwargs:
-            raise Day2Exception("Undefined parameter 'max_green_day2'")
+            raise AdventOfCodeException("Undefined parameter 'max_green_day2'")
         if "max_blue_day2" not in kwargs:
-            raise Day2Exception("Undefined parameter 'max_blue_day2'")
+            raise AdventOfCodeException("Undefined parameter 'max_blue_day2'")
 
         max_cube_set: CubeSet = CubeSet(
             red=kwargs["max_red_day2"],
@@ -150,7 +150,7 @@ def decode_line(line: str) -> Tuple[int, List[CubeSet]]:
     line_to_decode = line
     match = re.match(r"^Game (\d+): (.+)$", line_to_decode)
     if not match:
-        raise Day2Exception(f"Invalid game in line : {line_to_decode}")
+        raise AdventOfCodeException(f"Invalid game in line : {line_to_decode}")
     cube_sets: List[CubeSet] = []
     for cube_set in match.group(2).split(";"):
         # e.g cube_set = "3 green, 7 blue, 5 red"

@@ -5,7 +5,7 @@ from logging import Logger
 from pathlib import Path
 from typing import Dict, List
 
-from utils.error import Day1Exception
+from utils.error import AdventOfCodeException
 from utils.logger import MyLogger
 
 FILE_PATH = os.path.abspath(__file__)
@@ -50,7 +50,7 @@ def day1(part2: bool = False, **kwargs) -> int:
     :return: None.
     """
     if "data_day1" not in kwargs:
-        raise Day1Exception("Undefined parameter 'data_day1'")
+        raise AdventOfCodeException("Undefined parameter 'data_day1'")
 
     # Parse the file
     numbers: List[int] = parse_data(kwargs["data_day1"], part2)
@@ -69,7 +69,7 @@ def parse_data(data_path: Path, part2: bool) -> List[int]:
             res.append(decode_line(line.strip(), part2))
     # Assert something is parsed
     if len(res) == 0:
-        raise Day1Exception(f"no data are found in file {data_path}")
+        raise AdventOfCodeException(f"no data are found in file {data_path}")
     return res
 
 
@@ -86,7 +86,7 @@ def decode_line(line: str, part2: bool) -> int:
     # Find all number occurence (at least one)
     numbers: List[str] = re.findall(r"\d+", line_to_decode)
     if len(numbers) == 0:
-        raise Day1Exception(f"no number found for line {line_to_decode}")
+        raise AdventOfCodeException(f"no number found for line {line_to_decode}")
 
     # Return the first and the last digit
     res: int = int(f"{numbers[0][0]}{numbers[-1][-1]}")

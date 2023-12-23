@@ -5,7 +5,7 @@ from logging import Logger
 from pathlib import Path
 from typing import List
 
-from utils.error import Day5Exception
+from utils.error import AdventOfCodeException
 from utils.logger import MyLogger
 
 FILE_PATH = os.path.abspath(__file__)
@@ -148,7 +148,7 @@ def day5(part2: bool = False, **kwargs) -> None:
     :return: None.
     """
     if "data_day5" not in kwargs:
-        raise Day5Exception("Undefined parameter 'data_day5'")
+        raise AdventOfCodeException("Undefined parameter 'data_day5'")
 
     # Parse the file
     almanac: Almanac = parse_data(kwargs["data_day5"], part2)

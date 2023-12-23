@@ -6,7 +6,7 @@ from logging import Logger
 from pathlib import Path
 from typing import List
 
-from utils.error import Day7Exception
+from utils.error import AdventOfCodeException
 from utils.logger import MyLogger
 
 FILE_PATH = os.path.abspath(__file__)
@@ -135,7 +135,7 @@ def day7(part2: bool = False, **kwargs) -> int:
     :return: None.
     """
     if "data_day7" not in kwargs:
-        raise Day7Exception("Undefined parameter 'data_day7'")
+        raise AdventOfCodeException("Undefined parameter 'data_day7'")
 
     hands: List[Hand] = parse_data(kwargs["data_day7"], part2)
     hands.sort()
