@@ -24,3 +24,11 @@ class Day5Exception(AdventOfCodeException):
 
 class Day6Exception(AdventOfCodeException):
     """The base exception class for all day6 Exceptions"""
+
+
+class Day7Exception(AdventOfCodeException):
+    """The base exception class for all day7 Exceptions"""
+
+
+class Day8Exception(AdventOfCodeException):
+    """The base exception class for all day8 Exceptions"""
