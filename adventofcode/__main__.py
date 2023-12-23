@@ -9,6 +9,7 @@ from day4 import day4, get_parser_day4
 from day5 import day5, get_parser_day5
 from day6 import day6, get_parser_day6
 from day7 import day7, get_parser_day7
+from day8 import day8, get_parser_day8
 from utils.error import AdventOfCodeException
 
 
@@ -27,6 +28,7 @@ def get_parser() -> argparse.ArgumentParser:
             get_parser_day5(),
             get_parser_day6(),
             get_parser_day7(),
+            get_parser_day8(),
         ]
     )
     return parser
@@ -53,7 +55,8 @@ def main() -> None:
     day6(part2=True, **vars(args))
     day7(**vars(args))
     day7(part2=True, **vars(args))
-
+    day8(**vars(args))
+    day8(part2=True, **vars(args))
 
 if __name__ == "__main__":
     try:
