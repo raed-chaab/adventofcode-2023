@@ -6,7 +6,8 @@ from typing import Any, Callable, List
 
 from utils.error import AdventOfCodeException
 
-MODULES = 10
+MODULES = 11
+EXCLUDE_MODULES = [10]
 
 
 def get_parser() -> argparse.ArgumentParser:
@@ -19,6 +20,7 @@ def get_parser() -> argparse.ArgumentParser:
         parents=[
             getattr(importlib.import_module(f"day{id}"), f"get_parser_day{id}")()
             for id in range(1, MODULES + 1)
+            if id not in EXCLUDE_MODULES
         ]
     )
     return parser
@@ -33,6 +35,7 @@ def main() -> None:
     days: List[Callable[[Any], int]] = [
         getattr(importlib.import_module(f"day{id}"), f"day{id}")
         for id in range(1, MODULES + 1)
+        if id not in EXCLUDE_MODULES
     ]
 
     for day in days:
