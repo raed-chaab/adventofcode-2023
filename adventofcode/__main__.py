@@ -6,7 +6,7 @@ from typing import Any, Callable, List
 
 from utils.error import AdventOfCodeException
 
-MODULES = 11
+MODULES = 12
 EXCLUDE_MODULES = [10]
 
 
