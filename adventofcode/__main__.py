@@ -6,8 +6,8 @@ from typing import Any, Callable, List
 
 from utils.error import AdventOfCodeException
 
-MODULES = 17
-EXCLUDE_MODULES = [10, 16]
+MODULES = 18
+EXCLUDE_MODULES = [10, 16, 17]
 
 
 def get_parser() -> argparse.ArgumentParser:
